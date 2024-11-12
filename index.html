@@ -36,7 +36,36 @@
 
 <div class="container mt-5 content">
     <div id="newsCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-        <div class="carousel-inner" id="carouselContent"></div>
+        <div class="carousel-inner">
+            <!-- Static Images for Carousel -->
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="images/image1.jpg" class="d-block w-100" alt="News Image 1" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Placeholder Title 1</h4>
+                        <p><strong>CNN</strong> - Placeholder Date</p>
+                        <p>Placeholder description for image 1.</p>
+                        <a href="#" target="_blank" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="images/image2.jpg" class="d-block w-100" alt="News Image 2" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Placeholder Title 2</h4>
+                        <p><strong>CNN</strong> - Placeholder Date</p>
+                        <p>Placeholder description for image 2.</p>
+                        <a href="#" target="_blank" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add additional carousel items as needed -->
+        </div>
 
         <!-- Carousel controls -->
         <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
@@ -53,19 +82,37 @@
 <div class="container mt-5 content">
     <div class="additional-news mt-5">
         <h2>More Articles</h2>
-        <div class="row" id="additionalNews"></div>
+        <div class="row">
+            <!-- Static Images for Additional News -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="images/image3.jpg" class="card-img-top" alt="News Image 3" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Placeholder Title 3</h5>
+                        <p class="card-text">Placeholder description for image 3.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">CNN - Placeholder Date</small><br>
+                        <a href="#" target="_blank" class="btn btn-primary btn-sm mt-2">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="images/image4.jpg" class="card-img-top" alt="News Image 4" style="max-height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Placeholder Title 4</h5>
+                        <p class="card-text">Placeholder description for image 4.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">CNN - Placeholder Date</small><br>
+                        <a href="#" target="_blank" class="btn btn-primary btn-sm mt-2">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more additional news cards as needed -->
+        </div>
     </div>
-</div>
-
-<div class="container mt-5 text-center">
-    <h4>Follow CNN</h4>
-    <ul class="list-inline">
-        <li class="list-inline-item"><a href="https://facebook.com/CNN" target="_blank" title="Visit us on Facebook"><img src="images/facebook icon.png" alt="Facebook Icon" style="width: 30px; height: 30px;"></a></li>
-        <li class="list-inline-item"><a href="https://twitter.com/CNN" target="_blank" title="Visit us on X"><img src="images/x icon.png" alt="Twitter Icon" style="width: 30px; height: 30px;"></a></li>
-        <li class="list-inline-item"><a href="https://instagram.com/CNN" target="_blank" title="Visit us on Instagram"><img src="images/instagram icon.png" alt="Instagram Icon" style="width: 30px; height: 30px;"></a></li>
-        <li class="list-inline-item"><a href="https://www.tiktok.com/@cnn?lang=en" target="_blank" title="Visit us on TikTok"><img src="images/tiktok icon.png" alt="TikTok Icon" style="width: 30px; height: 30px;"></a></li>
-        <li class="list-inline-item"><a href="https://www.linkedin.com/company/cnn" target="_blank" title="Visit us on LinkedIn"><img src="images/linkedin icon.png" alt="LinkedIn Icon" style="width: 30px; height: 30px;"></a></li>
-    </ul>
 </div>
 
 <footer class="bg-dark text-white text-center py-3 mt-5">
@@ -78,69 +125,6 @@
     <a href="https://edition.cnn.com/transcripts" class="footer__link">Transcripts</a>
     <p>&copy; 2024 Cable News Network. A Warner Bros. Discovery Company. All Rights Reserved.<br>CNN Sans ™ & © 2016 Cable News Network.</p>
 </footer>
-
-<!-- JavaScript to fetch news articles -->
-<script>
-    const apiKey = 'f92a033945994d4da7462846f83d7581'; // Replace with your NewsAPI key
-    const apiUrl = 'https://newsapi.org/v2/everything?q=news&language=en&sortBy=publishedAt&pageSize=15&domains=cnn.com&apiKey=${apiKey}';
-
-    async function fetchNews() {
-        try {
-            const response = await fetch(apiUrl);
-            const newsData = await response.json();
-
-            if (newsData.status === 'ok' && newsData.articles.length > 0) {
-                displayCarousel(newsData.articles);
-                displayAdditionalNews(newsData.articles);
-            } else {
-                document.getElementById('carouselContent').innerHTML = "<p>No articles found.</p>";
-            }
-        } catch (error) {
-            console.error("Error fetching news:", error);
-            document.getElementById('carouselContent').innerHTML = "<p>Error loading articles. Please try again later.</p>";
-        }
-    }
-
-    function displayCarousel(articles) {
-        const carouselContent = document.getElementById('carouselContent');
-        carouselContent.innerHTML = articles.slice(0, 1).map((article, index) => `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="${article.urlToImage || 'default-image.jpg'}" class="d-block w-100" alt="News Image" style="max-height: 400px; object-fit: cover;">
-                    </div>
-                    <div class="col-md-6">
-                        <h4>${article.title}</h4>
-                        <p><strong>${article.source.name}</strong> - ${new Date(article.publishedAt).toLocaleDateString()}</p>
-                        <p>${article.description}</p>
-                        <a href="${article.url}" target="_blank" class="btn btn-primary">Read more</a>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function displayAdditionalNews(articles) {
-        const additionalNews = document.getElementById('additionalNews');
-        additionalNews.innerHTML = articles.slice(1, 7).map(article => `
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="${article.urlToImage || 'default-image.jpg'}" class="card-img-top" alt="News Image" style="max-height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">${article.title}</h5>
-                        <p class="card-text">${article.description}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</small><br>
-                        <a href="${article.url}" target="_blank" class="btn btn-primary btn-sm mt-2">Read more</a>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    fetchNews();
-</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
