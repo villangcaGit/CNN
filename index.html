@@ -82,7 +82,7 @@
 <!-- JavaScript to fetch news articles -->
 <script>
     const apiKey = 'f92a033945994d4da7462846f83d7581'; // Replace with your NewsAPI key
-    const apiUrl = `https://newsapi.org/v2/everything?q=news&language=en&sortBy=publishedAt&pageSize=15&domains=cnn.com&apiKey=${apiKey}`;
+    const apiUrl = `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?q=news&language=en&sortBy=publishedAt&pageSize=15&domains=cnn.com&apiKey=${apiKey}`;
 
     async function fetchNews() {
         try {
